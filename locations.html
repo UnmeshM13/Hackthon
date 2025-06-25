@@ -37,7 +37,7 @@
     navigator.geolocation.getCurrentPosition((position)=>{
       let { latitude,longitude} = position.coords;
     });
-    console.log(latitude,longitude)
+    console.log(latitude,longitude);
     var map = L.map('map').setView([latitude, longitude], 19);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
