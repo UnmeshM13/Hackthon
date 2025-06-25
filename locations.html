@@ -8,6 +8,9 @@
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
   <style>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
     body {
       font-family: Arial, sans-serif;
       display: flex;
@@ -16,30 +19,19 @@
       align-items: center;
       background: #f0f0f0;
     }
-    #map { height: 180px; }
-    #locationButton {
-      padding: 12px 24px;
-      font-size: 16px;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    #locationButton:disabled {
-      background: #ccc;
-      cursor: not-allowed;
+    #map 
+    { 
+      height: 180px;
+      box-shadow:2px solid black;
     }
   </style>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
+  
 </head>
 <body>
 
   <!--<button id="locationButton">Send My Location</button>-->
 <div id="map"></div>
+  <script></script>
   <!--
   <script>
     const button = document.getElementById('locationButton');
