@@ -72,8 +72,8 @@
     if ("geolocation" in navigator) {
       navigator.geolocation.watchPosition(
         (position) => {
-          const lat = position.coords.latitude + 0.05109;
-          const lon = position.coords.longitude - 0.0286;
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
           updateMap(lat, lon);
         },
         (error) => {
