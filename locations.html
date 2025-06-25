@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Send Live Location</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background: #f0f0f0;
+    }
+
+    #locationButton {
+      padding: 12px 24px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #locationButton:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="locationButton">Send My Location</button>
+
+  <script>
+    const button = document.getElementById('locationButton');
+
+    button.addEventListener('click', () => {
+      if ('geolocation' in navigator) {
+        button.disabled = true;
+        button.textContent = "Sending...";
+
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const data = {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              timestamp: position.timestamp,
+            };
+
+            console.log("Location:", data);
+
+            // Send to your server
+            fetch('http://127.0.0.1:5500/train/locations.html', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            })
+            .then(response => {
+              if (response.ok) {
+                alert("Location sent successfully!");
+              } else {
+                alert("Failed to send location.");
+              }
+              button.disabled = false;
+              button.textContent = "Send My Location";
+            })
+            .catch(error => {
+              console.error("Error sending location:", error);
+              alert("Error sending location.");
+              button.disabled = false;
+              button.textContent = "Send My Location";
+            });
+
+          },
+          (error) => {
+            alert("Error getting location: " + error.message);
+            button.disabled = false;
+            button.textContent = "Send My Location";
+          }
+        );
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    });
+  </script>
+
+</body>
+</html>
